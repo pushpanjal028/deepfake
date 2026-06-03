@@ -33,3 +33,10 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Dist folders
+.dist/
+
+# Duplicate files
+backend/docker-compose.yml
+backend/.env
