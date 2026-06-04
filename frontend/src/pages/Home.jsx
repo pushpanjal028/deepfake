@@ -145,7 +145,7 @@ export default function Home() {
               <p className="text-xs font-mono text-veritas-muted mb-2 uppercase tracking-widest">See it in action</p>
               <div className="rounded-xl overflow-hidden border border-veritas-border aspect-video">
                 <iframe
-                  src="https://www.youtube.com/embed/Q_z5_wUpu_Y"
+                  src="https://www.youtube-nocookie.com/embed/Q_z5_wUpu_Y"
                   title="Veritas AI Demo"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
