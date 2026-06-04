@@ -113,7 +113,10 @@ async def get_status(request_id: str):
     """Poll for detection results by request_id."""
     result = _results.get(request_id)
     if result is None:
-        raise HTTPException(status_code=404, detail=f"Request ID not found: {request_id}")
+        from app.services.database_service import db
+        result = await db["detections"].find_one({"request_id": request_id}, {"_id": 0})
+        if result is None:
+            raise HTTPException(status_code=404, detail=f"Request ID not found: {request_id}")
     return result
 
 

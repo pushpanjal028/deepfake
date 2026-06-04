@@ -19,7 +19,7 @@ async def save_detection(result: dict):
 
 async def get_detections(limit: int = 20) -> list:
     try:
-        cursor = detections.find({}, {"_id": 0}).sort("_id", -1).limit(limit)
+        cursor = detections.find({}, {"_id": 0, "explainability.heatmap_base64": 0}).sort("_id", -1).limit(limit)
         return await cursor.to_list(length=limit)
     except Exception as e:
         logger.warning(f"Failed to fetch detections from MongoDB: {e}")
