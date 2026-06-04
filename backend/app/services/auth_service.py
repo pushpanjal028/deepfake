@@ -1,13 +1,17 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from app.config import settings
-from passlib.context import CryptContext
+import bcrypt
 from datetime import datetime
 
 client = AsyncIOMotorClient(settings.MONGODB_URL)
 db = client[settings.MONGODB_DB]
 users = db["users"]
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+def get_password_hash(password: str) -> str:
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
 async def create_user(email: str, password: str, name: str) -> dict | None:
@@ -17,7 +21,7 @@ async def create_user(email: str, password: str, name: str) -> dict | None:
     user = {
         "email": email,
         "name": name,
-        "hashed_password": pwd_context.hash(password),
+        "hashed_password": get_password_hash(password),
         "created_at": datetime.utcnow().isoformat(),
     }
     await users.insert_one(user)
@@ -28,6 +32,6 @@ async def authenticate_user(email: str, password: str) -> dict | None:
     user = await users.find_one({"email": email})
     if not user:
         return None
-    if not pwd_context.verify(password, user["hashed_password"]):
+    if not verify_password(password, user["hashed_password"]):
         return None
     return {"email": user["email"], "name": user["name"]}
