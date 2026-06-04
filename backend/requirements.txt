@@ -9,7 +9,7 @@ opencv-python-headless
 Pillow
 numpy
 python-jose[cryptography]
-passlib[bcrypt]
+bcrypt
 pydantic==2.5.0
 pydantic-settings==2.1.0
 python-dotenv==1.0.0
