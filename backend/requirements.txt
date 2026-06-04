@@ -2,6 +2,7 @@ fastapi==0.104.1
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 aiofiles==23.2.1
+<<<<<<< HEAD
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.1.0+cpu
 torchvision==0.16.0+cpu
@@ -19,3 +20,19 @@ grad-cam==1.4.6
 pymongo==4.6.3
 motor==3.3.2
 email-validator==2.1.0
+=======
+torch
+torchvision
+facenet-pytorch
+opencv-python-headless
+Pillow
+numpy
+python-jose[cryptography]
+bcrypt
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+grad-cam
+motor
+email-validator
+>>>>>>> 01413851fd90a66259bd76ee3746a14cd7b21adf
